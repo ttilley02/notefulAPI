@@ -18,20 +18,15 @@ foldersRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { name, content, modified} = req.body
-    const newfolder = { name, content, modified}; 
+    const { name} = req.body
+    const newfolder = { name}; 
 
     if (!name) {
            return res.status(400).json({
-             error: { message: `Missing 'title' in request body` }
+             error: { message: `Missing 'name' in request body` }
           });
          }
-    if (!content) {
-        return res.status(400).json({
-          error: { message: `Missing 'content' in request body` }
-        });
-      }
-    newfolder.author = author
+
     foldersService.insertfolder(
       req.app.get('db'),
       newfolder
